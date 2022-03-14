@@ -191,9 +191,10 @@ def bounded_dfs(initial_game_grid, initial_location, current_test_location, path
                 pengu_obj.can_move = True
                 while pengu_obj.can_move:
                     pengu_obj = movement_check_function(pengu_obj, move)
+                    
             if pengu_obj.score == goal:
                 return path
-            if valid_move(pengu_obj, pengu_obj.location):
+            else:
                 limit_hit = True
 
         else:
@@ -242,7 +243,7 @@ def main_id_dfs():
     # HW 3 specific variables
     frontier = deque([])
     goal = 16
-    result = []
+    result = True
     max_depth = 12
 
     # getting information necessary for all lists and variables
@@ -251,9 +252,9 @@ def main_id_dfs():
     pengu_obj.game_grid = copy_game_grid(initial_game_grid)
 
     # ID-DFS
-    path = [7, 4, 1]
-    depth = 12
-    while(depth <= max_depth):
+    path = []
+    depth = 0
+    while(result):
         result = bounded_dfs(initial_game_grid, initial_location, current_test_location, path, goal, depth, pengu_obj, frontier)
         if pengu_obj.score == goal:
             pengu_obj.move_tracker = str(result)
